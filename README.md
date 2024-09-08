@@ -81,7 +81,30 @@ The disclaimer advises users to use the open-source project for ethical and legi
 
 ## Installation
 
+### Using Homebrew
+
+```bash
+homebrew install owasp-offat/tap/offat
+```
+
 ### Using Go
+
+#### Github Hosted Method
+
+- Install latest release using below command
+
+  ```bash
+  go install -v github.com/owasp-offat/offat/cmd/offat@latest
+  ```
+
+- Install main/dev branch
+
+  ```bash
+  go install -v github.com/owasp-offat/offat/cmd/offat@main # install main branch
+  go install -v github.com/owasp-offat/offat/cmd/offat@dev  # install dev branch
+  ```
+
+#### Clone Method
 
 - Clone repository
 
@@ -101,9 +124,7 @@ The disclaimer advises users to use the open-source project for ethical and legi
     go install ./...
     ```
 
-### Using Containers
-
-### Docker
+### Using Containers/Docker
 
 - CLI Tool
 
