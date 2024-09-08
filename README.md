@@ -1,6 +1,6 @@
 # OFFAT - OFFensive Api Tester
 
-![OffAT Logo](/assets/images/logos/offat-3.png)
+![OffAT Logo](/assets/images/logos/offat-compressed.png)
 
 Automatically Tests for vulnerabilities after generating tests from openapi specification file. Project is in Beta stage, so sometimes it might crash while running.
 
