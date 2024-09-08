@@ -76,12 +76,14 @@ brews:
       name: homebrew-offat
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     url_template: "https://github.com/owasp-offat/offat/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
     commit_author:
       name: dmdhrumilmistry
       email: dmdhrumilmistry@users.noreply.github.com
-    folder: Formula
+    directory: Formula
     homepage: "https://owasp.org/OFFAT/"
     description: "Autonomous REST API Vulnerability Assessment Tool"
+    license: "MIT"
     test: |
       system "#{bin}/offat -v"
     install: |
