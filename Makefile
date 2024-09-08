@@ -19,4 +19,4 @@ bump:
 	@go get -u ./...
 	@go mod tidy
 
-local: build-local-image scan-vulns
+local: docker scan-vulns

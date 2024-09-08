@@ -18,7 +18,7 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-const Version = "v0.20.0"
+const Version = "v0.21.0-beta"
 
 func banner() {
 	fmt.Print(`
