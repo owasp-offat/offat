@@ -3,8 +3,8 @@ package parser
 import (
 	"sync"
 
-	"github.com/OWASP/OFFAT/src/pkg/fuzzer"
-	_ "github.com/OWASP/OFFAT/src/pkg/logging"
+	"github.com/owasp-offat/offat/pkg/fuzzer"
+	_ "github.com/owasp-offat/offat/pkg/logging"
 	"github.com/rs/zerolog/log"
 )
 

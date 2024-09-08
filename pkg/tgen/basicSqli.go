@@ -1,7 +1,7 @@
 package tgen
 
 import (
-	"github.com/OWASP/OFFAT/src/pkg/parser"
+	"github.com/owasp-offat/offat/pkg/parser"
 )
 
 // generates very basic sqli API tests

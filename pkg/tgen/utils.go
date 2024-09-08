@@ -7,8 +7,8 @@ import (
 	neturl "net/url"
 	"strings"
 
-	"github.com/OWASP/OFFAT/src/pkg/parser"
-	"github.com/OWASP/OFFAT/src/pkg/utils"
+	"github.com/owasp-offat/offat/pkg/parser"
+	"github.com/owasp-offat/offat/pkg/utils"
 	"github.com/rs/zerolog/log"
 )
 

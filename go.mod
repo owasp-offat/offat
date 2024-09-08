@@ -1,4 +1,4 @@
-module github.com/OWASP/OFFAT/src
+module github.com/owasp-offat/offat
 
 go 1.22.4
 

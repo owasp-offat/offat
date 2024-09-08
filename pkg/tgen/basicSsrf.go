@@ -1,8 +1,8 @@
 package tgen
 
 import (
-	_ "github.com/OWASP/OFFAT/src/pkg/logging"
-	"github.com/OWASP/OFFAT/src/pkg/parser"
+	_ "github.com/owasp-offat/offat/pkg/logging"
+	"github.com/owasp-offat/offat/pkg/parser"
 	"github.com/rs/zerolog/log"
 )
 

@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/OWASP/OFFAT/src/pkg/tgen"
-	"github.com/OWASP/OFFAT/src/pkg/utils"
+	"github.com/owasp-offat/offat/pkg/tgen"
+	"github.com/owasp-offat/offat/pkg/utils"
 )
 
 func Report(apiTests []*tgen.ApiTest, contentType string) ([]byte, error) {

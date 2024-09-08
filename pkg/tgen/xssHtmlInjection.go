@@ -1,7 +1,7 @@
 package tgen
 
 import (
-	"github.com/OWASP/OFFAT/src/pkg/parser"
+	"github.com/owasp-offat/offat/pkg/parser"
 )
 
 func BasicXssHtmlInjectionTest(baseUrl string, docParams []*parser.DocHttpParams, queryParams map[string]string, headers map[string]string, injectionConfig InjectionConfig) []*ApiTest {

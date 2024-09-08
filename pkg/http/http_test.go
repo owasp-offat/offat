@@ -3,7 +3,7 @@ package http_test
 import (
 	"testing"
 
-	"github.com/OWASP/OFFAT/src/pkg/http"
+	"github.com/owasp-offat/offat/pkg/http"
 
 	c "github.com/dmdhrumilmistry/fasthttpclient/client"
 	"github.com/valyala/fasthttp"

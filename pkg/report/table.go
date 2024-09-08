@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/OWASP/OFFAT/src/pkg/tgen"
 	"github.com/olekukonko/tablewriter"
+	"github.com/owasp-offat/offat/pkg/tgen"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/term"
 )

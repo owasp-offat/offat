@@ -3,10 +3,10 @@ package postrunner
 import (
 	"sync"
 
-	_ "github.com/OWASP/OFFAT/src/pkg/logging"
-	"github.com/OWASP/OFFAT/src/pkg/tgen"
-	"github.com/OWASP/OFFAT/src/pkg/utils"
 	"github.com/dlclark/regexp2"
+	_ "github.com/owasp-offat/offat/pkg/logging"
+	"github.com/owasp-offat/offat/pkg/tgen"
+	"github.com/owasp-offat/offat/pkg/utils"
 )
 
 // Note: DataLeakPattern, DataLeakPatterns, and DataLeakPatternMatch struct are stored

@@ -1,6 +1,6 @@
 package postrunner
 
-import "github.com/OWASP/OFFAT/src/pkg/tgen"
+import "github.com/owasp-offat/offat/pkg/tgen"
 
 // removes immune endpoints from the api tests slice
 func FilterImmuneResults(apiTests *[]*tgen.ApiTest, filterImmune *bool) {

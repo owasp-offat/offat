@@ -5,10 +5,10 @@ import (
 	"os"
 	"sync"
 
-	"github.com/OWASP/OFFAT/src/pkg/http"
-	"github.com/OWASP/OFFAT/src/pkg/tgen"
 	c "github.com/dmdhrumilmistry/fasthttpclient/client"
 	"github.com/k0kubun/go-ansi"
+	"github.com/owasp-offat/offat/pkg/http"
+	"github.com/owasp-offat/offat/pkg/tgen"
 	"github.com/schollz/progressbar/v3"
 	"golang.org/x/term"
 )

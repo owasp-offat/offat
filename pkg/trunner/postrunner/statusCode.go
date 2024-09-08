@@ -3,9 +3,9 @@ package postrunner
 import (
 	"regexp"
 
-	_ "github.com/OWASP/OFFAT/src/pkg/logging"
-	"github.com/OWASP/OFFAT/src/pkg/tgen"
-	"github.com/OWASP/OFFAT/src/pkg/utils"
+	_ "github.com/owasp-offat/offat/pkg/logging"
+	"github.com/owasp-offat/offat/pkg/tgen"
+	"github.com/owasp-offat/offat/pkg/utils"
 	"github.com/rs/zerolog/log"
 )
 

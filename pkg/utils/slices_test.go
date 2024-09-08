@@ -3,7 +3,7 @@ package utils_test
 import (
 	"testing"
 
-	"github.com/OWASP/OFFAT/src/pkg/utils"
+	"github.com/owasp-offat/offat/pkg/utils"
 )
 
 func TestSearchStringInSlice(t *testing.T) {

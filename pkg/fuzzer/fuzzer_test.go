@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/OWASP/OFFAT/src/pkg/fuzzer"
+	"github.com/owasp-offat/offat/pkg/fuzzer"
 )
 
 // TestGenerateRandomIntInRange tests the GenerateRandomIntInRange function.

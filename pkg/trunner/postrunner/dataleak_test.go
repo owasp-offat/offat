@@ -6,9 +6,9 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/OWASP/OFFAT/src/pkg/tgen"
-	"github.com/OWASP/OFFAT/src/pkg/trunner/postrunner"
 	"github.com/dmdhrumilmistry/fasthttpclient/client"
+	"github.com/owasp-offat/offat/pkg/tgen"
+	"github.com/owasp-offat/offat/pkg/trunner/postrunner"
 
 	"github.com/dlclark/regexp2"
 )

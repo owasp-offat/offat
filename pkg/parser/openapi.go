@@ -5,8 +5,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/OWASP/OFFAT/src/pkg/utils"
 	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/owasp-offat/offat/pkg/utils"
 	"github.com/rs/zerolog/log"
 	"github.com/valyala/fasthttp"
 )

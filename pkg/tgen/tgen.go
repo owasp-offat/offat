@@ -3,9 +3,9 @@ package tgen
 import (
 	"regexp"
 
-	_ "github.com/OWASP/OFFAT/src/pkg/logging"
-	"github.com/OWASP/OFFAT/src/pkg/parser"
-	"github.com/OWASP/OFFAT/src/pkg/utils"
+	_ "github.com/owasp-offat/offat/pkg/logging"
+	"github.com/owasp-offat/offat/pkg/parser"
+	"github.com/owasp-offat/offat/pkg/utils"
 	"github.com/rs/zerolog/log"
 )
 
