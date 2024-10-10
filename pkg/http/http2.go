@@ -22,7 +22,9 @@ type ThrottledTransport struct {
 }
 
 type CustomClient struct {
-	Client *http.Client
+	Requests  []*client.Request
+	Responses []*client.ConcurrentResponse
+	Client    *http.Client
 }
 
 func GetResponseHeaders(resp *http.Response) map[string]string {
