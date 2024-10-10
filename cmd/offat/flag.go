@@ -36,6 +36,8 @@ type FlagConfig struct {
 	// Report
 	AvoidImmuneFilter *bool
 	OutputFilePath    *string
+
+	HTTP2 *bool
 }
 
 // Custom type for headers
