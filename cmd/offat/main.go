@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	c "github.com/dmdhrumilmistry/fasthttpclient/client"
 	"github.com/owasp-offat/offat/pkg/http"
 	_ "github.com/owasp-offat/offat/pkg/logging"
 	"github.com/owasp-offat/offat/pkg/parser"
@@ -70,6 +71,8 @@ func main() {
 	config.OutputFilePath = flag.String("o", "output.json", "JSON report output file path. default: output.json")
 	config.AvoidImmuneFilter = flag.Bool("ai", true, "does not filter immune endpoint from results if used. usage: -ai=true/false")
 
+	config.HTTP2 = flag.Bool("http2", false, "enable HTTP/2 support")
+
 	flag.Parse()
 
 	// Start Timer
@@ -103,6 +106,8 @@ func main() {
 		log.Error().Err(err).Msg("failed to set baseUrl")
 	}
 
+	fmt.Println(config.BaseUrl)
+
 	// set struct DocHttpParams
 	if err := parser.Doc.SetDocHttpParams(); err != nil {
 		log.Error().Stack().Err(err).Msg("failed while fetching doc http params")
@@ -112,12 +117,21 @@ func main() {
 	parser.FuzzDocHttpParams()
 
 	// Create http client and config
-	httpCfg := http.NewConfig(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
-	hc := http.NewHttp(httpCfg)
+	var hc c.ClientInterface // changed hc to interface
+	if config.HTTP2 != nil && *config.HTTP2 {
+		hc = http.NewConfigHttp2(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
+	} else {
+		httpCfg := http.NewConfig(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
+		new_http := http.NewHttp(httpCfg)
+		hc = new_http.Client.FHClient
+	}
 
 	// Test server connectivity
-	url := *parser.Doc.GetBaseUrl()
-	resp, err := hc.Client.FHClient.Do(url, fasthttp.MethodGet, nil, nil, nil)
+	// url := *parser.Doc.GetBaseUrl()
+	url := "https://petstore.swagger.io/v2/store/inventory" // Uncomment for testing
+
+	// resp, err := hc.Client.FHClient.Do(url, fasthttp.MethodGet, nil, nil, nil)
+	resp, err := hc.Do(url, fasthttp.MethodGet, nil, nil, nil)
 	if err != nil {
 		log.Error().Stack().Err(err).Msg("cannot connect to server")
 		os.Exit(1)
@@ -176,7 +190,7 @@ func main() {
 	}
 
 	// run api tests
-	trunner.RunApiTests(&apiTestHandler, hc, hc.Client.FHClient, apiTests)
+	trunner.RunApiTests(&apiTestHandler, hc, apiTests)
 	log.Info().Msgf("Total Requests: %d", len(apiTests))
 
 	// **## Run Post Tests processors ##**

@@ -7,14 +7,13 @@ import (
 
 	c "github.com/dmdhrumilmistry/fasthttpclient/client"
 	"github.com/k0kubun/go-ansi"
-	"github.com/owasp-offat/offat/pkg/http"
 	"github.com/owasp-offat/offat/pkg/tgen"
 	"github.com/schollz/progressbar/v3"
 	"golang.org/x/term"
 )
 
 // Runs API Tests
-func RunApiTests(t *tgen.TGenHandler, hc *http.Http, client c.ClientInterface, apiTests []*tgen.ApiTest) {
+func RunApiTests(t *tgen.TGenHandler, client c.ClientInterface, apiTests []*tgen.ApiTest) {
 	var wg sync.WaitGroup
 
 	// Get the terminal size
