@@ -106,8 +106,6 @@ func main() {
 		log.Error().Err(err).Msg("failed to set baseUrl")
 	}
 
-	fmt.Println(config.BaseUrl)
-
 	// set struct DocHttpParams
 	if err := parser.Doc.SetDocHttpParams(); err != nil {
 		log.Error().Stack().Err(err).Msg("failed while fetching doc http params")
@@ -122,15 +120,12 @@ func main() {
 		hc = http.NewConfigHttp2(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
 	} else {
 		httpCfg := http.NewConfig(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
-		new_http := http.NewHttp(httpCfg)
-		hc = new_http.Client.FHClient
+		hc = http.NewHttp(httpCfg).Client.FHClient
 	}
 
 	// Test server connectivity
-	// url := *parser.Doc.GetBaseUrl()
-	url := "https://petstore.swagger.io/v2/store/inventory" // Uncomment for testing
+	url := *parser.Doc.GetBaseUrl()
 
-	// resp, err := hc.Client.FHClient.Do(url, fasthttp.MethodGet, nil, nil, nil)
 	resp, err := hc.Do(url, fasthttp.MethodGet, nil, nil, nil)
 	if err != nil {
 		log.Error().Stack().Err(err).Msg("cannot connect to server")

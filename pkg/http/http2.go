@@ -80,8 +80,6 @@ func (c *CustomClient) Do(uri string, method string, queryParams any, headers an
 	}
 	elapsed := time.Since(now)
 
-	// fmt.Println("HTTP Version:", resp.Proto) // To check if HTTP/2 is being used
-
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
