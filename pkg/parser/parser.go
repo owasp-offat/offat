@@ -132,7 +132,10 @@ func (p *Parser) Parse(filename string, isUrl bool) (err error) {
 			return err
 		}
 		p.Doc = &OpenApi{}
-		p.Doc.SetDoc(doc)
+		if err := p.Doc.SetDoc(doc); err != nil {
+			log.Error().Err(err).Msgf("failed to set doc values")
+			return err
+		}
 
 	} else {
 		var doc openapi2.T
@@ -140,7 +143,10 @@ func (p *Parser) Parse(filename string, isUrl bool) (err error) {
 			return err
 		}
 		p.Doc = &Swagger{}
-		p.Doc.SetDoc(&doc)
+		if err := p.Doc.SetDoc(&doc); err != nil {
+			log.Error().Err(err).Msgf("failed to set doc values")
+			return err
+		}
 	}
 
 	return nil
