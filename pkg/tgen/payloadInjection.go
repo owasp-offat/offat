@@ -9,10 +9,16 @@ import (
 
 // injects payload in HTTP parser.param based on type/value
 // It's being used in `injectParamIntoApiTest` function
-func injectParamInParam(params *[]parser.Param, payload string) {
-	for i := range *params {
+func injectParamInParam(params []parser.Param, payload, injectIn string) []parser.Param {
+	// inject payload in key
+	injectedParams := append(params, parser.Param{
+		Name: payload,
+		In:   injectIn,
+		Type: []string{"string"},
+	})
+
+	for _, param := range injectedParams {
 		var paramType string
-		param := &(*params)[i]
 		if len(param.Type) == 0 && param.Value == nil {
 			log.Warn().Msgf("skipping payload %s injection for %v since type/value is missing", payload, param)
 			continue
@@ -28,28 +34,32 @@ func injectParamInParam(params *[]parser.Param, payload string) {
 			param.Value = payload
 		}
 	}
+
+	return injectedParams
 }
 
 // generates Api tests by injecting payloads in values
 func injectParamIntoApiTest(url string, docParams []*parser.DocHttpParams, queryParams map[string]string, headers map[string]string, testName string, injectionConfig InjectionConfig) []*ApiTest {
 	var tests []*ApiTest
+	docPrms := docParams
 	// TODO: only inject payloads if any payload is accepted by the endpoint, else ignore injection
 	// as this will reduce number of tests generated and increase efficiency
 	for _, payload := range injectionConfig.Payloads {
 		// TODO: implement injection in both key or value at a time
-		for _, docParam := range docParams {
+		for _, docParam := range docPrms {
 			// inject payloads into string before converting it to map[string]string
 			if injectionConfig.InBody {
-				injectParamInParam(&(docParam.BodyParams), payload.InjText)
+				docParam.BodyParams = injectParamInParam(docParam.BodyParams, payload.InjText, Body)
+
 			}
 			if injectionConfig.InQuery {
-				injectParamInParam(&(docParam.QueryParams), payload.InjText)
+				docParam.QueryParams = injectParamInParam(docParam.QueryParams, payload.InjText, Query)
 			}
 			if injectionConfig.InCookie {
-				injectParamInParam(&(docParam.CookieParams), payload.InjText)
+				docParam.CookieParams = injectParamInParam(docParam.CookieParams, payload.InjText, Cookie)
 			}
 			if injectionConfig.InHeader {
-				injectParamInParam(&(docParam.HeaderParams), payload.InjText)
+				docParam.HeaderParams = injectParamInParam(docParam.HeaderParams, payload.InjText, Header)
 			}
 
 			// parse maps

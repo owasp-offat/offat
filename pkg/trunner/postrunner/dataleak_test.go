@@ -9,14 +9,12 @@ import (
 	"github.com/dmdhrumilmistry/fasthttpclient/client"
 	"github.com/owasp-offat/offat/pkg/tgen"
 	"github.com/owasp-offat/offat/pkg/trunner/postrunner"
-
-	"github.com/dlclark/regexp2"
 )
 
 // Mock utility function for FindAllString
-var mockFindAllString = func(re *regexp2.Regexp, target string) []string {
-	return []string{}
-}
+// var mockFindAllString = func(re *regexp2.Regexp, target string) []string {
+// 	return []string{}
+// }
 
 // Test cases for UpdateDataLeakResult
 func TestUpdateDataLeakResult(t *testing.T) {

@@ -8,6 +8,7 @@ import (
 	c "github.com/dmdhrumilmistry/fasthttpclient/client"
 	"github.com/k0kubun/go-ansi"
 	"github.com/owasp-offat/offat/pkg/tgen"
+	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"golang.org/x/term"
 )
@@ -45,10 +46,12 @@ func RunApiTests(t *tgen.TGenHandler, client c.ClientInterface, apiTests []*tgen
 		wg.Add(1)
 		go func(apiTest *tgen.ApiTest) {
 			defer wg.Done()
-			defer bar.Add(1)
-
 			resp, err := client.Do(apiTest.Request.Uri, apiTest.Request.Method, apiTest.Request.QueryParams, apiTest.Request.Headers, apiTest.Request.Body)
 			apiTest.Response = c.NewConcurrentResponse(resp, err)
+
+			if err := bar.Add(1); err != nil {
+				log.Error().Err(err).Msg("Failed to add to bar")
+			}
 		}(apiTest)
 	}
 

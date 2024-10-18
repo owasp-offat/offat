@@ -47,6 +47,11 @@ type Payload struct {
 	Regex                   string // regex to be used for post processing
 }
 
+// Struct used for injecting payloads as per configuration
+type PayloadConfig struct {
+	In string // body,
+}
+
 // For Post runner
 type DataLeakPattern struct {
 	Name       string `json:"name" yaml:"name"`
