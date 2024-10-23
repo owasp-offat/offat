@@ -29,8 +29,7 @@ func NewConfigHttp3(requestsPerSecond *int, skipTlsVerification *bool, proxy *st
 
 	var transport *http3.Transport
 	if *proxy != "" {
-		log.Error().Msgf("Cannot use proxy with HTTP/3")
-		os.Exit(1)
+		log.Fatal().Msgf("Cannot use proxy with HTTP/3")
 	} else {
 		transport = &http3.Transport{
 			TLSClientConfig: tlsConfig,
