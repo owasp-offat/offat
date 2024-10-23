@@ -38,6 +38,7 @@ type FlagConfig struct {
 	OutputFilePath    *string
 
 	HTTP2 *bool
+	HTTP3 *bool
 }
 
 // Custom type for headers

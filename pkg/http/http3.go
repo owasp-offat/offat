@@ -3,14 +3,16 @@ package http
 import (
 	"crypto/tls"
 	"net/http"
-	"net/url"
+	"os"
 	"time"
 
+	"github.com/quic-go/quic-go"
+	"github.com/quic-go/quic-go/http3"
+	"github.com/quic-go/quic-go/qlog"
 	"github.com/rs/zerolog/log"
-	"golang.org/x/net/http2"
 )
 
-func NewConfigHttp2(requestsPerSecond *int, skipTlsVerification *bool, proxy *string) *CustomClient {
+func NewConfigHttp3(requestsPerSecond *int, skipTlsVerification *bool, proxy *string) *CustomClient {
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: *skipTlsVerification,
 		MinVersion:         tls.VersionTLS12,
@@ -25,22 +27,17 @@ func NewConfigHttp2(requestsPerSecond *int, skipTlsVerification *bool, proxy *st
 		PreferServerCipherSuites: true,
 	}
 
-	var transport *http.Transport
+	var transport *http3.Transport
 	if *proxy != "" {
-		proxy_url, _ := url.Parse(*proxy)
-		transport = &http.Transport{
-			TLSClientConfig: tlsConfig,
-			Proxy:           http.ProxyURL(proxy_url),
-		}
+		log.Error().Msgf("Cannot use proxy with HTTP/3")
+		os.Exit(1)
 	} else {
-		transport = &http.Transport{
+		transport = &http3.Transport{
 			TLSClientConfig: tlsConfig,
+			QUICConfig: &quic.Config{
+				Tracer: qlog.DefaultConnectionTracer,
+			},
 		}
-	}
-
-	err := http2.ConfigureTransport(transport)
-	if err != nil {
-		log.Error().Msgf("failed to configure transport: %v", err)
 	}
 
 	rateLimitedTransport := NewThrottledTransport(1*time.Second, *requestsPerSecond, transport)
