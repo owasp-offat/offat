@@ -72,6 +72,7 @@ func main() {
 	config.AvoidImmuneFilter = flag.Bool("ai", true, "does not filter immune endpoint from results if used. usage: -ai=true/false")
 
 	config.HTTP2 = flag.Bool("http2", false, "enable HTTP/2 support")
+	config.HTTP3 = flag.Bool("http3", false, "enable HTTP/3 support")
 
 	flag.Parse()
 
@@ -118,6 +119,8 @@ func main() {
 	var hc c.ClientInterface // changed hc to interface
 	if config.HTTP2 != nil && *config.HTTP2 {
 		hc = http.NewConfigHttp2(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
+	} else if config.HTTP3 != nil && *config.HTTP3 {
+		hc = http.NewConfigHttp3(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
 	} else {
 		httpCfg := http.NewConfig(config.RequestsPerSecond, config.SkipTlsVerification, config.Proxy)
 		hc = http.NewHttp(httpCfg).Client.FHClient
