@@ -3,7 +3,6 @@ package http
 import (
 	"crypto/tls"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/quic-go/quic-go"
