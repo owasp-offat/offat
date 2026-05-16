@@ -1,22 +1,31 @@
-run:
-	@go run -race ./cmd/offat/ -v
+.PHONY: all build test test-integration lint tidy vet clean run
 
-dbuild:
-	@docker build -t dmdhrumilmistry/offat .
+BINARY := offat
+PKG    := github.com/owasp-offat/offat
+LDFLAGS := -s -w -X $(PKG)/internal/cli.Version=$(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 
-scan-vulns:
-	@trivy image dmdhrumilmistry/offat --scanners vuln
-
-docker: dbuild scan-vulns
+all: build
 
 build:
-	@go build -o bin/offat cmd/offat/*
+	go build -ldflags "$(LDFLAGS)" -o $(BINARY) ./cmd/offat
 
 test:
-	@go test -cover -v ./...
+	go test ./...
 
-bump:
-	@go get -u ./...
-	@go mod tidy
+test-integration:
+	go test -tags=integration ./test/...
 
-local: docker scan-vulns
+lint:
+	golangci-lint run
+
+tidy:
+	go mod tidy
+
+vet:
+	go vet ./...
+
+run: build
+	./$(BINARY) --help
+
+clean:
+	rm -f $(BINARY) coverage.out
